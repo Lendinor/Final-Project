@@ -1,44 +1,44 @@
-var namespace = "http://www.w3.org/2000/svg"
+var namespace = "http://www.w3.org/2000/svg";
 
 // Write your code here!
 
 // DO NOT EDIT CODE BELOW THIS LINE!
 function getX(shape) {
-  if (!shape) {
-    throw "Uh oh, you tried to get the x coordinate of a shape that doesn't exist!"
-  }
-  try {
-    if (shape.hasAttribute("x")) {
-      return parseFloat(shape.getAttribute("x"))
-    } else if (shape.hasAttribute("cx")) {
-      return parseFloat(shape.getAttribute("cx"))
-    }  else if (shape.hasAttribute("x1")) {
-      return parseFloat(shape.getAttribute("x1"))
+    if (!shape) {
+        throw "Uh oh, you tried to get the x coordinate of a shape that doesn't exist!";
     }
-  } catch(err) {
-    throw "You're trying to get the x coordinate of something that isn't a shape!"
-  }
+    try {
+        if (shape.hasAttribute("x")) {
+            return parseFloat(shape.getAttribute("x"));
+        } else if (shape.hasAttribute("cx")) {
+            return parseFloat(shape.getAttribute("cx"));
+        } else if (shape.hasAttribute("x1")) {
+            return parseFloat(shape.getAttribute("x1"));
+        }
+    } catch (err) {
+        throw "You're trying to get the x coordinate of something that isn't a shape!";
+    }
 }
 
 function getY(shape) {
-  if (!shape) {
-    throw "Uh oh, you tried to get the y coordinate of a shape that doesn't exist!"
-  }
-  try {
-    if (shape.hasAttribute("y")) {
-      return parseFloat(shape.getAttribute("y"))
-    } else if (shape.hasAttribute("cy")) {
-      return parseFloat(shape.getAttribute("cy"))
-    } else if (shape.hasAttribute("y1")) {
-      return parseFloat(shape.getAttribute("y1"))
+    if (!shape) {
+        throw "Uh oh, you tried to get the y coordinate of a shape that doesn't exist!";
     }
-  } catch (err) {
-    throw "You're trying to get the y coordinate of something that isn't a shape!"
-  }
+    try {
+        if (shape.hasAttribute("y")) {
+            return parseFloat(shape.getAttribute("y"));
+        } else if (shape.hasAttribute("cy")) {
+            return parseFloat(shape.getAttribute("cy"));
+        } else if (shape.hasAttribute("y1")) {
+            return parseFloat(shape.getAttribute("y1"));
+        }
+    } catch (err) {
+        throw "You're trying to get the y coordinate of something that isn't a shape!";
+    }
 }
 
 function setX(shape, x) {
-  if (!shape) {
+    if (!shape) {
     throw "I can't set the x of a shape that doesn't exist!"
   }
   if (isNaN(x)) {
@@ -267,141 +267,122 @@ function collides(shape1, shape2) {
          centerY < yMax)
 }
 
-var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0.5);
-//makeLine(0, 10.5, 1001.5, 10.5, "gray", 1, 0.75);
-//makeLine(10.5, 0, 10.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 21.5, 1001.5, 21.5, "gray", 1, 0.75);
-//makeLine(21.5, 0, 21.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 32.5, 1001.5, 32.5, "gray", 1, 0.75);
-//makeLine(32.5, 0, 32.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 43.5, 1001.5, 43.5, "gray", 1, 0.75);
-//makeLine(43.5, 0, 43.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 54.5, 1001.5, 54.5, "gray", 1, 0.75);
-//makeLine(54.5, 0, 54.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 65.5, 1001.5, 65.5, "gray", 1, 0.75);
-//makeLine(65.5, 0, 65.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 76.5, 1001.5, 76.5, "gray", 1, 0.75);
-//makeLine(76.5, 0, 76.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 87.5, 1001.5, 87.5, "gray", 1, 0.75);
-//makeLine(87.5, 0, 87.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 98.5, 1001.5, 98.5, "gray", 1, 0.75);
-//makeLine(98.5, 0, 98.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 109.5, 1001.5, 109.5, "gray", 1, 0.75);
-//makeLine(109.5, 0, 109.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 120.5, 1001.5, 120.5, "gray", 1, 0.75);
-//makeLine(120.5, 0, 120.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 131.5, 1001.5, 131.5, "gray", 1, 0.75);
-//makeLine(131.5, 0, 131.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 142.5, 1001.5, 142.5, "gray", 1, 0.75);
-//makeLine(142.5, 0, 142.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 153.5, 1001.5, 153.5, "gray", 1, 0.75);
-//makeLine(153.5, 0, 153.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 164.5, 1001.5, 164.5, "gray", 1, 0.75);
-//makeLine(164.5, 0, 164.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 175.5, 1001.5, 175.5, "gray", 1, 0.75);
-//makeLine(175.5, 0, 175.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 186.5, 1001.5, 186.5, "gray", 1, 0.75);
-//makeLine(186.5, 0, 186.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 197.5, 1001.5, 197.5, "gray", 1, 0.75);
-//makeLine(197.5, 0, 197.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 208.5, 1001.5, 208.5, "gray", 1, 0.75);
-//makeLine(208.5, 0, 208.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 219.5, 1001.5, 219.5, "gray", 1, 0.75);
-//makeLine(219.5, 0, 219.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 230.5, 1001.5, 230.5, "gray", 1, 0.75);
-//makeLine(230.5, 0, 230.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 241.5, 1001.5, 241.5, "gray", 1, 0.75);
-//makeLine(241.5, 0, 241.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 252.5, 1001.5, 252.5, "gray", 1, 0.75);
-//makeLine(252.5, 0, 252.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 263.5, 1001.5, 263.5, "gray", 1, 0.75);
-//makeLine(263.5, 0, 263.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 274.5, 1001.5, 274.5, "gray", 1, 0.75);
-//makeLine(274.5, 0, 274.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 285.5, 1001.5, 285.5, "gray", 1, 0.75);
-//makeLine(285.5, 0, 285.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 296.5, 1001.5, 296.5, "gray", 1, 0.75);
-//makeLine(296.5, 0, 296.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 307.5, 1001.5, 307.5, "gray", 1, 0.75);
-//makeLine(307.5, 0, 307.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 318.5, 1001.5, 318.5, "gray", 1, 0.75);
-//makeLine(318.5, 0, 318.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 329.5, 1001.5, 329.5, "gray", 1, 0.75);
-//makeLine(329.5, 0, 329.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 340.5, 1001.5, 340.5, "gray", 1, 0.75);
-//makeLine(340.5, 0, 340.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 351.5, 1001.5, 351.5, "gray", 1, 0.75);
-//makeLine(351.5, 0, 351.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 362.5, 1001.5, 362.5, "gray", 1, 0.75);
-//makeLine(362.5, 0, 362.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 373.5, 1001.5, 373.5, "gray", 1, 0.75);
-//makeLine(373.5, 0, 373.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 384.5, 1001.5, 384.5, "gray", 1, 0.75);
-//makeLine(384.5, 0, 384.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 395.5, 1001.5, 395.5, "gray", 1, 0.75);
-//makeLine(395.5, 0, 395.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 406.5, 1001.5, 406.5, "gray", 1, 0.75);
-//makeLine(406.5, 0, 406.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 417.5, 1001.5, 417.5, "gray", 1, 0.75);
-//makeLine(417.5, 0, 417.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 428.5, 1001.5, 428.5, "gray", 1, 0.75);
-//makeLine(428.5, 0, 428.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 439.5, 1001.5, 439.5, "gray", 1, 0.75);
-//makeLine(439.5, 0, 439.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 450.5, 1001.5, 450.5, "gray", 1, 0.75);
-//makeLine(450.5, 0, 450.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 461.5, 1001.5, 461.5, "gray", 1, 0.75);
-//makeLine(461.5, 0, 461.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 472.5, 1001.5, 472.5, "gray", 1, 0.75);
-//makeLine(472.5, 0, 472.5, 527.5, "gray", 1, 0.75);
-//makeLine(0, 483.5, 1001.5, 483.5, "gray", 1, 0.75);
-//makeLine(483.5, 0, 483.5, 527.5, "gray", 1, 0.75);
-  ////makeLine(0, 494.5, 1001.5, 494.5, "gray", 1, 0.75);
-//makeLine(494.5, 0, 494.5, 527.5, "gray", 1, 0.75);
-  ////makeLine(0, 505.5, 1001.5, 505.5, "gray", 1, 0.75);
-//makeLine(505.5, 0, 505.5, 527.5, "gray", 1, 0.75);
-  ////makeLine(0, 516.5, 1001.5, 516.5, "gray", 1, 0.75);
-//makeLine(516.5, 0, 516.5, 527.5, "gray", 1, 0.75);
-//makeLine(527.5, 0, 527.5, 527.5, "gray", 1, 0.75);
-//makeLine(538.5, 0, 538.5, 527.5, "gray", 1, 0.75);
-//makeLine(549.5, 0, 549.5, 527.5, "gray", 1, 0.75);
-//makeLine(560.5, 0, 560.5, 527.5, "gray", 1, 0.75);
-//makeLine(571.5, 0, 571.5, 527.5, "gray", 1, 0.75);
-//makeLine(582.5, 0, 582.5, 527.5, "gray", 1, 0.75);
-//makeLine(593.5, 0, 593.5, 527.5, "gray", 1, 0.75);
-//makeLine(604.5, 0, 604.5, 527.5, "gray", 1, 0.75);
-//makeLine(615.5, 0, 615.5, 527.5, "gray", 1, 0.75);
-//makeLine(626.5, 0, 626.5, 527.5, "gray", 1, 0.75);
-//makeLine(637.5, 0, 637.5, 527.5, "gray", 1, 0.75);
-//makeLine(648.5, 0, 648.5, 527.5, "gray", 1, 0.75);
-//makeLine(659.5, 0, 659.5, 527.5, "gray", 1, 0.75);
-//makeLine(670.5, 0, 670.5, 527.5, "gray", 1, 0.75);
-//makeLine(681.5, 0, 681.5, 527.5, "gray", 1, 0.75);
-//makeLine(692.5, 0, 692.5, 527.5, "gray", 1, 0.75);
-//makeLine(703.5, 0, 703.5, 527.5, "gray", 1, 0.75);
-//makeLine(714.5, 0, 714.5, 527.5, "gray", 1, 0.75);
-//makeLine(725.5, 0, 725.5, 527.5, "gray", 1, 0.75);
-//makeLine(736.5, 0, 736.5, 527.5, "gray", 1, 0.75);
-//makeLine(747.5, 0, 747.5, 527.5, "gray", 1, 0.75);
-//makeLine(758.5, 0, 758.5, 527.5, "gray", 1, 0.75);
-//makeLine(769.5, 0, 769.5, 527.5, "gray", 1, 0.75);
-//makeLine(780.5, 0, 780.5, 527.5, "gray", 1, 0.75);
-//makeLine(791.5, 0, 791.5, 527.5, "gray", 1, 0.75);
-//makeLine(802.5, 0, 802.5, 527.5, "gray", 1, 0.75);
-//makeLine(813.5, 0, 813.5, 527.5, "gray", 1, 0.75);
-//makeLine(824.5, 0, 824.5, 527.5, "gray", 1, 0.75);
-//makeLine(835.5, 0, 835.5, 527.5, "gray", 1, 0.75);
-//makeLine(846.5, 0, 846.5, 527.5, "gray", 1, 0.75);
-//makeLine(857.5, 0, 857.5, 527.5, "gray", 1, 0.75);
-//makeLine(868.5, 0, 868.5, 527.5, "gray", 1, 0.75);
-//makeLine(879.5, 0, 879.5, 527.5, "gray", 1, 0.75);
-//makeLine(890.5, 0, 890.5, 527.5, "gray", 1, 0.75);
-//makeLine(901.5, 0, 901.5, 527.5, "gray", 1, 0.75);
-//makeLine(912.5, 0, 912.5, 527.5, "gray", 1, 0.75);
-//makeLine(923.5, 0, 923.5, 527.5, "gray", 1, 0.75);
-//makeLine(934.5, 0, 934.5, 527.5, "gray", 1, 0.75);
-//makeLine(945.5, 0, 945.5, 527.5, "gray", 1, 0.75);
-//makeLine(956.5, 0, 956.5, 527.5, "gray", 1, 0.75);
-//makeLine(967.5, 0, 967.5, 527.5, "gray", 1, 0.75);
-//makeLine(978.5, 0, 978.5, 527.5, "gray", 1, 0.75);
-//makeLine(989.5, 0, 989.5, 527.5, "gray", 1, 0.75);
+//var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
+var wall = document.getElementById("walls")
+var player = makeRect(659,3,14,14,"green",1);
+var x = getX(player);
+var xscore = x;
+var y = getY(player);
+var yscore = y;
+var xscoreText = makeText(xscore, 969, 20, 20, "sans-serif", "blue");
+var yscoreText = makeText(yscore, 969, 50, 20, "sans-serif", "blue");
+var minotaur = makeRect(659,291,14,14,"brown",1)
+
+
+addEventListener('keydown', movePlayer);
+
+function movePlayer(event) {
+ //   console.log(event)
+    if (event.key === "a" && x > 3) {
+        move(player, -2, 0);
+        direction = "left";
+   } else if (event.key === "d" && x < 1314.5) {
+        move(player, 2, 0);
+        direction = "right";
+    } else if (event.key === "w" && y > 3) {
+        move(player, 0, -2);
+        direction = "up";
+   } else if (event.key === "s" && y < 594.5) {
+        move(player, 0, 2);
+        direction = "down";
+   } else if(event.keyCode === 13){
+    console.log("To infinity and beyond" )   
+   }
+    x = getX(player);
+    y = getY(player);
+    player.setAttribute("opacity", 0);
+    player = makeRect(x, y, 14, 14, "green", 1);
+
+}
+
+function intersectRect(r1, r2) {
+    var r1 = r1.getBoundingClientRect();    //BOUNDING BOX OF THE FIRST OBJECT
+    var r2 = r2.getBoundingClientRect();    //BOUNDING BOX OF THE SECOND OBJECT
+
+    //CHECK IF THE TWO BOUNDING BOXES OVERLAP
+  return !(r2.left > r1.right ||
+           r2.right < r1.left || 
+           r2.top > r1.bottom ||
+           r2.bottom < r1.top);
+}
+function minotaurz() {
+    var minox = getX(minotaur);
+    var minoy = getY(minotaur);
+    var minogoes = Math.random() * 100;
+        if(minogoes <= 25 && minox < 1314.5){
+            move(minotaur,16,0);
+        } else if (minogoes <= 50 && minogoes >= 25 && minoy < 594.5){
+            move(minotaur,0,-16);
+        } else if(minogoes <= 75 && minogoes >= 50 && minox > 5){
+            move(minotaur,-16,0);
+        }else if(minogoes <= 100 && minogoes >= 75 && minoy > 5){
+            move(minotaur,0,16);
+        }
+        if(minoy > 594.5){
+         move(minotaur,0,-16);   
+        }else if (minoy < 5){
+         move(minotaur,0,16);   
+        }
+
+    
+        minox = getX(minotaur);
+        minoy = getY(minotaur);
+//        } else{
+//         if(minox < x){
+//           move(minotaur,11,0);   
+//         }else if(minox > x){
+//            move(minotaur, -11, 0)   
+//         }
+//         if(minoy < y){
+//            move(minotaur,0,11);   
+//         }else if(minoy > y){
+//             move(minotaur,0,-11);   
+//         }
+//    }
+    
+//    requestAnimationFrame(minotaurz);
+
+}
+//minotaurz();
+var minotaurgo = setInterval(minotaurz, 1500); 
+
+
+function collision(){
+ if(intersectRect(player,wall)){
+    console.log("Hit!!");
+ }else     
+    if(intersectRect(player,minotaur)){
+     console.log("Beefed")   
+    }else{
+//    console.log("Clear!!") 
+ }
+    requestAnimationFrame(collision);
+
+}
+collision();
+
+function moreConditions() {    
+    xscore = x;
+    yscore = y;
+
+    xscoreText.innerHTML = xscore;
+    yscoreText.innerHTML = yscore;
+    requestAnimationFrame(moreConditions);
+}
+moreConditions();
+var time = 0;
+function timer(){
+ time = time + 1;
+ console.log(time)
+}
+var newVar = setInterval(timer, 1000);

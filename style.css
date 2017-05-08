@@ -1,3 +1,9 @@
 html{
  background-color: #cd7f32;   
 }
+
+svg{
+ display: block;
+ margin-right: auto;
+ margin-left: auto;
+}

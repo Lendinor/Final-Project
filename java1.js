@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var namespace = "http://www.w3.org/2000/svg";
 
 // Write your code here!
@@ -85,17 +85,17 @@ function move(shape, dx, dy) {
         throw "You need to tell me how much to move the shape in the y direction!";
     }
     if (shape.hasAttribute("x") && shape.hasAttribute("y")) {
-        var x = parseFloat(shape.getAttribute("x")),
+        var x = parseFloat(shape.getAttribute("x")), 
             y = parseFloat(shape.getAttribute("y"));
         shape.setAttribute("x", x + dx);
         shape.setAttribute("y", y + dy);
     } else if (shape.hasAttribute("cx")) {
-        var cx = parseFloat(shape.getAttribute("cx")),
+        var cx = parseFloat(shape.getAttribute("cx")), 
             cy = parseFloat(shape.getAttribute("cy"));
         shape.setAttribute("cx", cx + dx);
         shape.setAttribute("cy", cy + dy);
     } else if (shape.hasAttribute("x1")) {
-        var x1 = parseFloat(shape.getAttribute("x1")),
+        var x1 = parseFloat(shape.getAttribute("x1")), 
             y1 = parseFloat(shape.getAttribute("x1"));
         setX(shape, x1 + dx);
         setY(shape, y1 + dy);
@@ -286,141 +286,6 @@ function collides(shape1, shape2) {
     }
 }
 
-//var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
-    var wall = document.getElementById("walls"),
-        player = makeRect(0, 0, 10, 10, "green", 1),
-        x = getX(player),
-        xscore = x,
-        y = getY(player),
-        yscore = y,
-        direction,
-        xscoreText = makeText(xscore, 969, 20, 20, "sans-serif", "blue"),
-        yscoreText = makeText(yscore, 969, 50, 20, "sans-serif", "blue"),
-        minotaur = makeRect(418, 297, 10, 10, "brown", 1), 
-        wall = makeRect(0,0,10,10,"black",0.1);
-
-
-    addEventListener('keydown', movePlayer);
-
-    function movePlayer(event) {
- //   console.log(event)
-    if (event.key === "a" && x > 5) {
-        move(player, -11, 0);
-        if(collides(player,wall)){
-         move(player,11,0);  
-            console.log("Hello There");
-        }
-    } else if (event.key === "d" && x < 989.5) {
-        move(player, 11, 0);
-        if(collides(player,wall)){
-         move(player,-11,0);
-            console.log("Hello There")
-        }
-    } else if (event.key === "w" && y > 5) {
-        move(player, 0, -11);
-        if(collides(player,wall)){
-         move(player,0,11);  
-            console.log("Hello There");
-        }
-    } else if (event.key === "s" && y < 450.5) {
-        move(player, 0, 11);
-        if(collides(player,wall)){
-         move(player,0,-11);  
-            console.log("Hello There");
-        }
-    }
-        x = getX(player);
-        y = getY(player);
-        player.setAttribute("opacity", 0);
-        player = makeRect(x, y, 10, 10, "green", 1);
-
-    }
-
-    function intersectRect(r1, r2) {
-        var r1 = r1.getBoundingClientRect();    //BOUNDING BOX OF THE FIRST OBJECT
-        var r2 = r2.getBoundingClientRect();    //BOUNDING BOX OF THE SECOND OBJECT
-
-    //CHECK IF THE TWO BOUNDING BOXES OVERLAP
-        return !(r2.left > r1.right ||
-           r2.right < r1.left || 
-           r2.top > r1.bottom ||
-           r2.bottom < r1.top);
-    }
-    
-    function isPointInPoly(poly, pt) {
-        for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
-        ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y))
-        && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
-        && (c = !c);
-    return c;
-}    
-function minotaurz() {
-    var minox = getX(minotaur);
-    var minoy = getY(minotaur);
-    var minogoes = Math.random() * 100;
-        if(minogoes <= 25 && minox < 1314.5){
-            move(minotaur,11,0);
-            if(collides(minotaur,wall)){
-                move(mintaur,-11,0);  
-            }            
-        } else if (minogoes <= 50 && minogoes >= 25 && minoy < 594.5){
-            move(minotaur,0,-11);
-            if(collides(minotaur,wall)){
-                move(minotaur,0,11);  
-            }
-        } else if(minogoes <= 75 && minogoes >= 50 && minox > 5){
-            move(minotaur,-11,0);
-            if(collides(player,wall)){
-                move(mintaur,11,0);  
-            }
-        }else if(minogoes <= 100 && minogoes >= 75 && minoy > 5){
-            move(minotaur,0,11);
-            if(collides(minotaur,wall)){
-                move(minotaur,0,-11);  
-            }
-        }
-        if(minoy > 594.5){
-         move(minotaur,0,-16);   
-        }else if (minoy < 5){
-         move(minotaur,0,16);   
-        }
-
-        minox = getX(minotaur);
-        minoy = getY(minotaur);
-}
-minotaurz();
-var minotaurgo = setInterval(minotaurz, 1500); 
-
-function collision(){
- if(isPointInPoly(player,wall)){
-    console.log("Hit!!");
- }else     
-    if(intersectRect(player,minotaur)){
-     console.log("Beefed")   
-    }else{
-    console.log("Clear!!") 
- }
-    requestAnimationFrame(collision);
-
-}
-//collision();
-
-function moreConditions() {    
-    xscore = x;
-    yscore = y;
-
-    xscoreText.innerHTML = xscore;
-    yscoreText.innerHTML = yscore;
-    requestAnimationFrame(moreConditions);
-}
-moreConditions();
-var time = 0;
-function timer(){
- time = time + 1;
- console.log(time)
-}
-//var newVar = setInterval(timer, 1000);
-
 makeLine(0, 10.5, 1001.5, 10.5, "gray", 1, 0.75);
 makeLine(10.5, 0, 10.5, 527.5, "gray", 1, 0.75);
 makeLine(0, 21.5, 1001.5, 21.5, "gray", 1, 0.75);
@@ -559,219 +424,317 @@ makeLine(967.5, 0, 967.5, 527.5, "gray", 1, 0.75);
 makeLine(978.5, 0, 978.5, 527.5, "gray", 1, 0.75);
 makeLine(989.5, 0, 989.5, 527.5, "gray", 1, 0.75);
 
-makeRect(11,11,10,10,"black",1);
-makeRect(11,22,10,10,"black",1);
-makeRect(11,33,10,10,"black",1);
-makeRect(11,44,10,10,"black",1);
-makeRect(11,55,10,10,"black",1);
-makeRect(11,66,10,10,"black",1);
-makeRect(11,77,10,10,"black",1);
-makeRect(11,88,10,10,"black",1);
-makeRect(11,99,10,10,"black",1);
-makeRect(11,110,10,10,"black",1);
-makeRect(11,121,10,10,"black",1);
-makeRect(11,132,10,10,"black",1);
-makeRect(11,143,10,10,"black",1);
-makeRect(11,154,10,10,"black",1);
-makeRect(11,165,10,10,"black",1);
-makeRect(11,176,10,10,"black",1);
-makeRect(11,187,10,10,"black",1);
-makeRect(11,198,10,10,"black",1);
-makeRect(11,209,10,10,"black",1);
+var wall = makeRect(11, 11, 10, 10, "black", 1), 
+makeRect(11, 22, 10, 10, "black", 1), 
+makeRect(11, 33, 10, 10, "black", 1), 
+makeRect(11, 44, 10, 10, "black", 1), 
+makeRect(11, 55, 10, 10, "black", 1), 
+makeRect(11, 66, 10, 10, "black", 1), 
+makeRect(11, 77, 10, 10, "black", 1), 
+makeRect(11, 88, 10, 10, "black", 1), 
+makeRect(11, 99, 10, 10, "black", 1), 
+makeRect(11, 110, 10, 10, "black", 1), 
+makeRect(11, 121, 10, 10, "black", 1), 
+makeRect(11, 132, 10, 10, "black", 1), 
+makeRect(11, 143, 10, 10, "black", 1), 
+makeRect(11, 154, 10, 10, "black", 1), 
+makeRect(11, 165, 10, 10, "black", 1), 
+makeRect(11, 176, 10, 10, "black", 1), 
+makeRect(11, 187, 10, 10, "black", 1), 
+makeRect(11, 198, 10, 10, "black", 1), 
+makeRect(11, 209, 10, 10, "black", 1), 
+makeRect(22, 99, 10, 10, "black", 1), 
+makeRect(22, 121, 10, 10, "black", 1), 
+makeRect(22, 165, 10, 10, "black", 1), 
+makeRect(22, 209, 10, 10, "black", 1), 
+makeRect(33, 11, 10, 10, "black", 1), 
+makeRect(33, 22, 10, 10, "black", 1), 
+makeRect(33, 33, 10, 10, "black", 1), 
+makeRect(33, 55, 10, 10, "black", 1), 
+makeRect(33, 66, 10, 10, "black", 1), 
+makeRect(33, 77, 10, 10, "black", 1), 
+makeRect(33, 99, 10, 10, "black", 1), 
+makeRect(33, 121, 10, 10, "black", 1), 
+makeRect(33, 143, 10, 10, "black", 1), 
+makeRect(33, 165, 10, 10, "black", 1), 
+makeRect(33, 187, 10, 10, "black", 1), 
+makeRect(33, 209, 10, 10, "black", 1), 
+makeRect(44, 11, 10, 10, "black", 1), 
+makeRect(44, 55, 10, 10, "black", 1), 
+makeRect(44, 77, 10, 10, "black", 1), 
+makeRect(44, 143, 10, 10, "black", 1), 
+makeRect(44, 165, 10, 10, "black", 1), 
+makeRect(44, 187, 10, 10, "black", 1), 
+makeRect(44, 209, 10, 10, "black", 1), 
+makeRect(55, 11, 10, 10, "black", 1), 
+makeRect(55, 33, 10, 10, "black", 1), 
+makeRect(55, 44, 10, 10, "black", 1), 
+makeRect(55, 55, 10, 10, "black", 1), 
+makeRect(55, 77, 10, 10, "black", 1), 
+makeRect(55, 88, 10, 10, "black", 1), 
+makeRect(55, 99, 10, 10, "black", 1), 
+makeRect(55, 110, 10, 10, "black", 1), 
+makeRect(55, 121, 10, 10, "black", 1), 
+makeRect(55, 132, 10, 10, "black", 1), 
+makeRect(55, 143, 10, 10, "black", 1), 
+makeRect(55, 165, 10, 10, "black", 1), 
+makeRect(55, 176, 10, 10, "black", 1), 
+makeRect(55, 187, 10, 10, "black", 1), 
+makeRect(55, 209, 10, 10, "black", 1), 
+makeRect(66, 11, 10, 10, "black", 1), 
+makeRect(66, 33, 10, 10, "black", 1), 
+makeRect(66, 77, 10, 10, "black", 1), 
+makeRect(66, 143, 10, 10, "black", 1), 
+makeRect(66, 209, 10, 10, "black", 1), 
+makeRect(77, 11, 10, 10, "black", 1), 
+makeRect(77, 33, 10, 10, "black", 1), 
+makeRect(77, 55, 10, 10, "black", 1), 
+makeRect(77, 66, 10, 10, "black", 1), 
+makeRect(77, 77, 10, 10, "black", 1), 
+makeRect(77, 99, 10, 10, "black", 1), 
+makeRect(77, 110, 10, 10, "black", 1), 
+makeRect(77, 121, 10, 10, "black", 1), 
+makeRect(77, 143, 10, 10, "black", 1), 
+makeRect(77, 165, 10, 10, "black", 1), 
+makeRect(77, 176, 10, 10, "black", 1), 
+makeRect(77, 187, 10, 10, "black", 1), 
+makeRect(77, 198, 10, 10, "black", 1), 
+makeRect(77, 209, 10, 10, "black", 1), 
+makeRect(88, 11, 10, 10, "black", 1), 
+makeRect(88, 55, 10, 10, "black", 1), 
+makeRect(88, 99, 10, 10, "black", 1), 
+makeRect(88, 143, 10, 10, "black", 1), 
+makeRect(88, 209, 10, 10, "black", 1), 
+makeRect(99, 11, 10, 10, "black", 1), 
+makeRect(99, 33, 10, 10, "black", 1), 
+makeRect(99, 44, 10, 10, "black", 1), 
+makeRect(99, 55, 10, 10, "black", 1), 
+makeRect(99, 77, 10, 10, "black", 1), 
+makeRect(99, 99, 10, 10, "black", 1), 
+makeRect(99, 121, 10, 10, "black", 1), 
+makeRect(99, 132, 10, 10, "black", 1), 
+makeRect(99, 143, 10, 10, "black", 1), 
+makeRect(99, 154, 10, 10, "black", 1), 
+makeRect(99, 165, 10, 10, "black", 1), 
+makeRect(99, 176, 10, 10, "black", 1), 
+makeRect(99, 187, 10, 10, "black", 1), 
+makeRect(99, 209, 10, 10, "black", 1), 
+makeRect(110, 11, 10, 10, "black", 1), 
+makeRect(110, 55, 10, 10, "black", 1), 
+makeRect(110, 77, 10, 10, "black", 1), 
+makeRect(110, 99, 10, 10, "black", 1), 
+makeRect(110, 187, 10, 10, "black", 1), 
+makeRect(110, 209, 10, 10, "black", 1), 
+makeRect(121, 11, 10, 10, "black", 1), 
+makeRect(121, 33, 10, 10, "black", 1), 
+makeRect(121, 55, 10, 10, "black", 1), 
+makeRect(121, 77, 10, 10, "black", 1), 
+makeRect(121, 99, 10, 10, "black", 1), 
+makeRect(121, 110, 10, 10, "black", 1), 
+makeRect(121, 121, 10, 10, "black", 1), 
+makeRect(121, 132, 10, 10, "black", 1), 
+makeRect(121, 143, 10, 10, "black", 1), 
+makeRect(121, 154, 10, 10, "black", 1), 
+makeRect(121, 165, 10, 10, "black", 1), 
+makeRect(121, 187, 10, 10, "black", 1), 
+makeRect(121, 209, 10, 10, "black", 1), 
+makeRect(132, 11, 10, 10, "black", 1), 
+makeRect(132, 33, 10, 10, "black", 1), 
+makeRect(132, 55, 10, 10, "black", 1), 
+makeRect(132, 77, 10, 10, "black", 1), 
+makeRect(132, 143, 10, 10, "black", 1), 
+makeRect(132, 187, 10, 10, "black", 1), 
+makeRect(132, 209, 10, 10, "black", 1), 
+makeRect(143, 11, 10, 10, "black", 1), 
+makeRect(143, 33, 10, 10, "black", 1), 
+makeRect(143, 55, 10, 10, "black", 1), 
+makeRect(143, 77, 10, 10, "black", 1), 
+makeRect(143, 88, 10, 10, "black", 1), 
+makeRect(143, 99, 10, 10, "black", 1), 
+makeRect(143, 110, 10, 10, "black", 1), 
+makeRect(143, 121, 10, 10, "black", 1), 
+makeRect(143, 132, 10, 10, "black", 1), 
+makeRect(143, 143, 10, 10, "black", 1), 
+makeRect(143, 165, 10, 10, "black", 1), 
+makeRect(143, 176, 10, 10, "black", 1), 
+makeRect(143, 187, 10, 10, "black", 1), 
+makeRect(143, 209, 10, 10, "black", 1), 
+makeRect(154, 11, 10, 10, "black", 1), 
+makeRect(154, 33, 10, 10, "black", 1), 
+makeRect(154, 55, 10, 10, "black", 1), 
+makeRect(154, 143, 10, 10, "black", 1), 
+makeRect(154, 165, 10, 10, "black", 1), 
+makeRect(154, 209, 10, 10, "black", 1), 
+makeRect(165, 11, 10, 10, "black", 1), 
+makeRect(165, 33, 10, 10, "black", 1), 
+makeRect(165, 55, 10, 10, "black", 1), 
+makeRect(165, 66, 10, 10, "black", 1), 
+makeRect(165, 77, 10, 10, "black", 1), 
+makeRect(165, 88, 10, 10, "black", 1), 
+makeRect(165, 99, 10, 10, "black", 1), 
+makeRect(165, 110, 10, 10, "black", 1), 
+makeRect(165, 121, 10, 10, "black", 1), 
+makeRect(165, 143, 10, 10, "black", 1), 
+makeRect(165, 165, 10, 10, "black", 1), 
+makeRect(165, 187, 10, 10, "black", 1), 
+makeRect(165, 198, 10, 10, "black", 1), 
+makeRect(165, 209, 10, 10, "black", 1), 
+makeRect(176, 11, 10, 10, "black", 1), 
+makeRect(176, 33, 10, 10, "black", 1), 
+makeRect(176, 77, 10, 10, "black", 1), 
+makeRect(176, 143, 10, 10, "black", 1), 
+makeRect(176, 165, 10, 10, "black", 1), 
+makeRect(176, 209, 10, 10, "black", 1), 
+makeRect(187, 11, 10, 10, "black", 1), 
+makeRect(187, 33, 10, 10, "black", 1), 
+makeRect(187, 55, 10, 10, "black", 1), 
+makeRect(187, 66, 10, 10, "black", 1), 
+makeRect(187, 77, 10, 10, "black", 1), 
+makeRect(187, 99, 10, 10, "black", 1), 
+makeRect(187, 110, 10, 10, "black", 1), 
+makeRect(187, 121, 10, 10, "black", 1), 
+makeRect(187, 132, 10, 10, "black", 1), 
+makeRect(187, 143, 10, 10, "black", 1), 
+makeRect(187, 165, 10, 10, "black", 1), 
+makeRect(187, 176, 10, 10, "black", 1), 
+makeRect(187, 187, 10, 10, "black", 1), 
+makeRect(187, 198, 10, 10, "black", 1), 
+makeRect(187, 209, 10, 10, "black", 1), 
+makeRect(198, 11, 10, 10, "black", 1), 
+makeRect(198, 33, 10, 10, "black", 1), 
+makeRect(198, 143, 10, 10, "black", 1), 
+makeRect(198, 209, 10, 10, "black", 1), 
+makeRect(209, 11, 10, 10, "black", 1), 
+makeRect(209, 22, 10, 10, "black", 1), 
+makeRect(209, 33, 10, 10, "black", 1), 
+makeRect(209, 44, 10, 10, "black", 1), 
+makeRect(209, 55, 10, 10, "black", 1), 
+makeRect(209, 66, 10, 10, "black", 1), 
+makeRect(209, 77, 10, 10, "black", 1), 
+makeRect(209, 88, 10, 10, "black", 1), 
+makeRect(209, 99, 10, 10, "black", 1), 
+makeRect(209, 110, 10, 10, "black", 1), 
+makeRect(209, 121, 10, 10, "black", 1), 
+makeRect(209, 132, 10, 10, "black", 1), 
+makeRect(209, 143, 10, 10, "black", 1), 
+makeRect(209, 154, 10, 10, "black", 1), 
+makeRect(209, 165, 10, 10, "black", 1), 
+makeRect(209, 176, 10, 10, "black", 1), 
+makeRect(209, 187, 10, 10, "black", 1), 
+makeRect(209, 209, 10, 10, "black", 1);
 
-makeRect(22,99,10,10,"black",1);
-makeRect(22,121,10,10,"black",1);
-makeRect(22,165,10,10,"black",1);
-makeRect(22,209,10,10,"black",1);
+//var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
+    var wall = document.getElementById("walls"), 
+        player = makeRect(0, 0, 10, 10, "green", 1), 
+        x = getX(player), 
+        xscore = x, 
+        y = getY(player), 
+        yscore = y,  
+        xscoreText = makeText(xscore, 969, 20, 20, "sans-serif", "blue"), 
+        yscoreText = makeText(yscore, 969, 50, 20, "sans-serif", "blue"), 
+        minotaur = makeRect(99, 110, 10, 10, "brown", 1), 
 
-makeRect(33,11,10,10,"black",1);
-makeRect(33,22,10,10,"black",1);
-makeRect(33,33,10,10,"black",1);
-makeRect(33,55,10,10,"black",1);
-makeRect(33,66,10,10,"black",1);
-makeRect(33,77,10,10,"black",1);
-makeRect(33,99,10,10,"black",1);
-makeRect(33,121,10,10,"black",1);
-makeRect(33,143,10,10,"black",1);
-makeRect(33,165,10,10,"black",1);
-makeRect(33,187,10,10,"black",1);
-makeRect(33,209,10,10,"black",1);
 
-makeRect(44,11,10,10,"black",1);
-makeRect(44,55,10,10,"black",1);
-makeRect(44,77,10,10,"black",1);
-makeRect(44,143,10,10,"black",1);
-makeRect(44,165,10,10,"black",1);
-makeRect(44,187,10,10,"black",1);
-makeRect(44,209,10,10,"black",1);
+    addEventListener('keydown', movePlayer);
 
-makeRect(55,11,10,10,"black",1);
-makeRect(55,33,10,10,"black",1);
-makeRect(55,44,10,10,"black",1);
-makeRect(55,55,10,10,"black",1);
-makeRect(55,77,10,10,"black",1);
-makeRect(55,88,10,10,"black",1);
-makeRect(55,99,10,10,"black",1);
-makeRect(55,110,10,10,"black",1);
-makeRect(55,121,10,10,"black",1);
-makeRect(55,132,10,10,"black",1);
-makeRect(55,143,10,10,"black",1);
-makeRect(55,165,10,10,"black",1);
-makeRect(55,176,10,10,"black",1);
-makeRect(55,187,10,10,"black",1);
-makeRect(55,209,10,10,"black",1);
+    function movePlayer(event) {
+ //   console.log(event)
+    if (event.key === "a" && x > 5) {
+        move(player, -11, 0);
+        if(collides(player, wall)){
+         move(player, 11, 0);  
+            console.log("Hello There");
+        }
+    } else if (event.key === "d" && x < 989.5) {
+        move(player, 11, 0);
+        if(collides(player, wall)){
+         move(player, -11, 0);
+            console.log("Hello There");
+        }
+    } else if (event.key === "w" && y > 5) {
+        move(player, 0, -11);
+        if(collides(player, wall)){
+         move(player, 0, 11);  
+            console.log("Hello There");
+        }
+    } else if (event.key === "s" && y < 450.5) {
+        move(player, 0, 11);
+        if(collides(player, wall)){
+         move(player, 0, -11);  
+            console.log("Hello There");
+        }
+    }
+        x = getX(player);
+        y = getY(player);
+        player.setAttribute("opacity", 0);
+        player = makeRect(x, y, 10, 10, "green", 1);
 
-makeRect(66,11,10,10,"black",1);
-makeRect(66,33,10,10,"black",1);
-makeRect(66,77,10,10,"black",1);
-makeRect(66,143,10,10,"black",1);
-makeRect(66,209,10,10,"black",1);
+    }
 
-makeRect(77,11,10,10,"black",1);
-makeRect(77,33,10,10,"black",1);
-makeRect(77,55,10,10,"black",1);
-makeRect(77,66,10,10,"black",1);
-makeRect(77,77,10,10,"black",1);
-makeRect(77,99,10,10,"black",1);
-makeRect(77,110,10,10,"black",1);
-makeRect(77,121,10,10,"black",1);
-makeRect(77,143,10,10,"black",1);
-makeRect(77,165,10,10,"black",1);
-makeRect(77,176,10,10,"black",1);
-makeRect(77,187,10,10,"black",1);
-makeRect(77,198,10,10,"black",1);
-makeRect(77,209,10,10,"black",1);
+function minotaurz() {
+    var minox = getX(minotaur);
+    var minoy = getY(minotaur);
+    var minogoes = Math.random() * 100;
+        if(minogoes <= 25 && minox < 1314.5){
+            move(minotaur, 11, 0);
+            if(collides(minotaur, wall)){
+                move(minotaur, -11, 0);  
+            }            
+        } else if (minogoes <= 50 && minogoes >= 25 && minoy < 594.5){
+            move(minotaur, 0, -11);
+            if(collides(minotaur, wall)){
+                move(minotaur, 0, 11);  
+            }
+        } else if(minogoes <= 75 && minogoes >= 50 && minox > 5){
+            move(minotaur, -11, 0);
+            if(collides(player, wall)){
+                move(minotaur, 11, 0);  
+            }
+        }else if(minogoes <= 100 && minogoes >= 75 && minoy > 5){
+            move(minotaur, 0, 11);
+            if(collides(minotaur, wall)){
+                move(minotaur, 0, -11);  
+            }
+        }
+        if(minoy > 594.5){
+         move(minotaur, 0, -16);   
+        }else if (minoy < 5){
+         move(minotaur, 0, 16);   
+        }
 
-makeRect(88,11,10,10,"black",1);
-makeRect(88,55,10,10,"black",1);
-makeRect(88,99,10,10,"black",1);
-makeRect(88,143,10,10,"black",1);
-makeRect(88,209,10,10,"black",1);
+        minox = getX(minotaur);
+        minoy = getY(minotaur);
+}
+minotaurz();
+var minotaurgo = setInterval(minotaurz, 1500); 
 
-makeRect(99,11,10,10,"black",1);
-makeRect(99,33,10,10,"black",1);
-makeRect(99,44,10,10,"black",1);
-makeRect(99,55,10,10,"black",1);
-makeRect(99,77,10,10,"black",1);
-makeRect(99,99,10,10,"black",1);
-makeRect(99,121,10,10,"black",1);
-makeRect(99,132,10,10,"black",1);
-makeRect(99,143,10,10,"black",1);
-makeRect(99,154,10,10,"black",1);
-makeRect(99,165,10,10,"black",1);
-makeRect(99,176,10,10,"black",1);
-makeRect(99,187,10,10,"black",1);
-makeRect(99,209,10,10,"black",1);
+function collision(){
+ if(collides(player, wall)){
+    console.log("Hit!!");
+ }else     
+    if(collides(player, minotaur)){
+     console.log("Beefed");   
+    }else{
+    console.log("Clear!!");
+ }
+    requestAnimationFrame(collision);
 
-makeRect(110,11,10,10,"black",1);
-makeRect(110,55,10,10,"black",1);
-makeRect(110,77,10,10,"black",1);
-makeRect(110,99,10,10,"black",1);
-makeRect(110,187,10,10,"black",1);
-makeRect(110,209,10,10,"black",1);
+}
+//collision();
 
-makeRect(121,11,10,10,"black",1);
-makeRect(121,33,10,10,"black",1);
-makeRect(121,55,10,10,"black",1);
-makeRect(121,77,10,10,"black",1);
-makeRect(121,99,10,10,"black",1);
-makeRect(121,110,10,10,"black",1);
-makeRect(121,121,10,10,"black",1);
-makeRect(121,132,10,10,"black",1);
-makeRect(121,143,10,10,"black",1);
-makeRect(121,154,10,10,"black",1);
-makeRect(121,165,10,10,"black",1);
-makeRect(121,187,10,10,"black",1);
-makeRect(121,209,10,10,"black",1);
+function moreConditions() {    
+    xscore = x;
+    yscore = y;
 
-makeRect(132,11,10,10,"black",1);
-makeRect(132,33,10,10,"black",1);
-makeRect(132,55,10,10,"black",1);
-makeRect(132,77,10,10,"black",1);
-makeRect(132,143,10,10,"black",1);
-makeRect(132,187,10,10,"black",1);
-makeRect(132,209,10,10,"black",1);
+    xscoreText.innerHTML = xscore;
+    yscoreText.innerHTML = yscore;
+    requestAnimationFrame(moreConditions);
+}
+moreConditions();
+var time = 0;
+function timer(){
+ time = time + 1;
+ console.log(time);
+}
+//var newVar = setInterval(timer, 1000);
 
-makeRect(143,11,10,10,"black",1);
-makeRect(143,33,10,10,"black",1);
-makeRect(143,55,10,10,"black",1);
-makeRect(143,77,10,10,"black",1);
-makeRect(143,88,10,10,"black",1);
-makeRect(143,99,10,10,"black",1);
-makeRect(143,110,10,10,"black",1);
-makeRect(143,121,10,10,"black",1);
-makeRect(143,132,10,10,"black",1);
-makeRect(143,143,10,10,"black",1);
-makeRect(143,165,10,10,"black",1);
-makeRect(143,176,10,10,"black",1);
-makeRect(143,187,10,10,"black",1);
-makeRect(143,209,10,10,"black",1);
-
-makeRect(154,11,10,10,"black",1);
-makeRect(154,33,10,10,"black",1);
-makeRect(154,55,10,10,"black",1);
-makeRect(154,143,10,10,"black",1);
-makeRect(154,165,10,10,"black",1);
-makeRect(154,209,10,10,"black",1);
-
-makeRect(165,11,10,10,"black",1);
-makeRect(165,33,10,10,"black",1);
-makeRect(165,55,10,10,"black",1);
-makeRect(165,66,10,10,"black",1);
-makeRect(165,77,10,10,"black",1);
-makeRect(165,88,10,10,"black",1);
-makeRect(165,99,10,10,"black",1);
-makeRect(165,110,10,10,"black",1);
-makeRect(165,121,10,10,"black",1);
-makeRect(165,143,10,10,"black",1);
-makeRect(165,165,10,10,"black",1);
-makeRect(165,187,10,10,"black",1);
-makeRect(165,198,10,10,"black",1);
-makeRect(165,209,10,10,"black",1);
-
-makeRect(176,11,10,10,"black",1);
-makeRect(176,33,10,10,"black",1);
-makeRect(176,77,10,10,"black",1);
-makeRect(176,143,10,10,"black",1);
-makeRect(176,165,10,10,"black",1);
-makeRect(176,209,10,10,"black",1);
-
-makeRect(187,11,10,10,"black",1);
-makeRect(187,33,10,10,"black",1);
-makeRect(187,55,10,10,"black",1);
-makeRect(187,66,10,10,"black",1);
-makeRect(187,77,10,10,"black",1);
-makeRect(187,99,10,10,"black",1);
-makeRect(187,110,10,10,"black",1);
-makeRect(187,121,10,10,"black",1);
-makeRect(187,132,10,10,"black",1);
-makeRect(187,143,10,10,"black",1);
-makeRect(187,165,10,10,"black",1);
-makeRect(187,176,10,10,"black",1);
-makeRect(187,187,10,10,"black",1);
-makeRect(187,198,10,10,"black",1);
-makeRect(187,209,10,10,"black",1);
-
-makeRect(198,11,10,10,"black",1);
-makeRect(198,33,10,10,"black",1);
-makeRect(198,143,10,10,"black",1);
-makeRect(198,209,10,10,"black",1);
-
-makeRect(209,11,10,10,"black",1);
-makeRect(209,22,10,10,"black",1);
-makeRect(209,33,10,10,"black",1);
-makeRect(209,44,10,10,"black",1);
-makeRect(209,55,10,10,"black",1);
-makeRect(209,66,10,10,"black",1);
-makeRect(209,77,10,10,"black",1);
-makeRect(209,88,10,10,"black",1);
-makeRect(209,99,10,10,"black",1);
-makeRect(209,110,10,10,"black",1);
-makeRect(209,121,10,10,"black",1);
-makeRect(209,132,10,10,"black",1);
-makeRect(209,143,10,10,"black",1);
-makeRect(209,154,10,10,"black",1);
-makeRect(209,165,10,10,"black",1);
-makeRect(209,176,10,10,"black",1);
-makeRect(209,187,10,10,"black",1);
-makeRect(209,209,10,10,"black",1);

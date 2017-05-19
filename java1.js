@@ -623,15 +623,21 @@ makeRect(209, 176, 10, 10, "black", 1),
 makeRect(209, 187, 10, 10, "black", 1), 
 makeRect(209, 209, 10, 10, "black", 1)] ;
 
+var Gate1 = makeRect(22 ,11, 10, 10, "purple", 1);
+var Gate2 = makeRect(209,198, 10, 10, "purple", 1);
+alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze.")
 //var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
-    var player = makeRect(0, 0, 10, 10, "green", 1), 
+    var player = makeRect(22, 22, 10, 10, "green", 1), 
         x = getX(player), 
         xscore = x, 
         y = getY(player), 
         yscore = y,  
         xscoreText = makeText(xscore, 969, 20, 20, "sans-serif", "blue"), 
         yscoreText = makeText(yscore, 969, 50, 20, "sans-serif", "blue"), 
-        minotaur = makeRect(99, 110, 10, 10, "brown", 1); 
+        minotaur = makeRect(99, 110, 10, 10, "brown", 1),
+        minox = getX(minotaur),
+        minoy = getY(minotaur),
+        mdead = false;
 
 
         addEventListener('keydown', movePlayer);
@@ -674,6 +680,12 @@ makeRect(209, 209, 10, 10, "black", 1)] ;
             console.log("YOUR MOVE");
         }
          }
+    }else if (event.key === "f"){
+        if(minox === x + 11 || minox === x - 11){
+            if(minoy === y){
+                mdead = true;
+            }
+        }
     }
         x = getX(player);
         y = getY(player);
@@ -683,8 +695,9 @@ makeRect(209, 209, 10, 10, "black", 1)] ;
     }
 
 function minotaurz() {
-    var minox = getX(minotaur);
-    var minoy = getY(minotaur);
+    if(mdead === true){
+        
+    }else{
     var minogoes = Math.random() * 100;
         if(minogoes <= 25 && minox < 1314.5){
             move(minotaur, 11, 0);
@@ -723,6 +736,7 @@ function minotaurz() {
 
         minox = getX(minotaur);
         minoy = getY(minotaur);
+    }
 }
 minotaurz();
 var minotaurgo = setInterval(minotaurz, 1500); 
@@ -735,7 +749,9 @@ function moreConditions() {
 
     xscoreText.innerHTML = xscore;
     yscoreText.innerHTML = yscore;
+        
     requestAnimationFrame(moreConditions);
+    
 }
 moreConditions();
 var time = 0;
@@ -745,3 +761,22 @@ function timer(){
 }
 //var newVar = setInterval(timer, 1000);
 
+function ismdead(){
+    if(mdead === true){
+     Gate1.parentNode.removeChild(Gate1);
+     Gate2.parentNode.removeChild(Gate2);
+     minotaur.parentNode.removeChild(minotaur);    
+    }
+    requestAnimationFrame(ismdead);
+}
+ismdead();
+
+function escape(){
+  if(x === 220 && y === 198 && mdead === true){
+     alert("You win!");
+        alert("Resetting Maze...");
+        document.location.reload();
+    }
+    
+}
+var newVar = setInterval(escape, 1000);

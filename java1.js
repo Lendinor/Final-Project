@@ -266,25 +266,25 @@ function collides(shape1, shape2) {
          centerY > yMin &&
          centerY < yMax);
     }
-
-    function collideVertLine(square, line) {
-    // if line's x coordinate is between the sides of the square, and: 
-            // one endpoint is in the square OR endpoints are on opposite sides of the square
-        var xMin = Math.min(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
-        var xMax = Math.max(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
-        var yMin = Math.min(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2")));
-        var yMax = Math.max(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2"))); 
-    }
-    
-    function collideHorizLine(square, line) {
-    
-    
-        var xMin = Math.min(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
-        var xMax = Math.max(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
-        var yMin = Math.min(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2")));
-        var yMax = Math.max(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2"))); 
-    }
 }
+//    function collideVertLine(square, line) {
+//        if line's x coordinate is between the sides of the square, and: 
+//           // one endpoint is in the square OR endpoints are on opposite sides of the square
+//        var xMin = Math.min(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
+//        var xMax = Math.max(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
+//        var yMin = Math.min(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2")));
+//        var yMax = Math.max(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2"))); 
+//    }
+    
+//    function collideHorizLine(square, line) {
+    
+    
+//        var xMin = Math.min(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
+//        var xMax = Math.max(parseFloat(shape2.getAttribute("x1")), parseFloat(shape2.getAttribute("x2")));
+ //       var yMin = Math.min(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2")));
+//        var yMax = Math.max(parseFloat(shape2.getAttribute("y1")), parseFloat(shape2.getAttribute("y2"))); 
+//    }
+//}
 
 makeLine(0, 10.5, 1001.5, 10.5, "gray", 1, 0.75);
 makeLine(10.5, 0, 10.5, 527.5, "gray", 1, 0.75);
@@ -424,7 +424,7 @@ makeLine(967.5, 0, 967.5, 527.5, "gray", 1, 0.75);
 makeLine(978.5, 0, 978.5, 527.5, "gray", 1, 0.75);
 makeLine(989.5, 0, 989.5, 527.5, "gray", 1, 0.75);
 
-var wall = makeRect(11, 11, 10, 10, "black", 1), 
+var wall =  [makeRect(11, 11, 10, 10, "black", 1), 
 makeRect(11, 22, 10, 10, "black", 1), 
 makeRect(11, 33, 10, 10, "black", 1), 
 makeRect(11, 44, 10, 10, "black", 1), 
@@ -621,48 +621,59 @@ makeRect(209, 154, 10, 10, "black", 1),
 makeRect(209, 165, 10, 10, "black", 1), 
 makeRect(209, 176, 10, 10, "black", 1), 
 makeRect(209, 187, 10, 10, "black", 1), 
-makeRect(209, 209, 10, 10, "black", 1);
+makeRect(209, 209, 10, 10, "black", 1)] ;
 
 //var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
-    var wall = document.getElementById("walls"), 
-        player = makeRect(0, 0, 10, 10, "green", 1), 
+    var player = makeRect(0, 0, 10, 10, "green", 1), 
         x = getX(player), 
         xscore = x, 
         y = getY(player), 
         yscore = y,  
         xscoreText = makeText(xscore, 969, 20, 20, "sans-serif", "blue"), 
         yscoreText = makeText(yscore, 969, 50, 20, "sans-serif", "blue"), 
-        minotaur = makeRect(99, 110, 10, 10, "brown", 1), 
+        minotaur = makeRect(99, 110, 10, 10, "brown", 1); 
 
 
-    addEventListener('keydown', movePlayer);
+        addEventListener('keydown', movePlayer);
 
     function movePlayer(event) {
  //   console.log(event)
     if (event.key === "a" && x > 5) {
         move(player, -11, 0);
-        if(collides(player, wall)){
+         for (var wallpiece of wall) {
+             console.log("Stuff");
+        if(collides(player, wallpiece)){
          move(player, 11, 0);  
-            console.log("Hello There");
+            console.log("YOUR MOVE");
         }
-    } else if (event.key === "d" && x < 989.5) {
+         }
+    } else if (event.key === "d" && x < 219.5) {
         move(player, 11, 0);
-        if(collides(player, wall)){
+         for (var wallpiece of wall) {
+             console.log("Stuff");
+        if(collides(player, wallpiece)){
          move(player, -11, 0);
-            console.log("Hello There");
+            console.log("YOUR MOVE");
         }
+         }
     } else if (event.key === "w" && y > 5) {
         move(player, 0, -11);
-        if(collides(player, wall)){
-         move(player, 0, 11);  
-            console.log("Hello There");
+         for (var wallpiece of wall) {
+             console.log("Stuff");
+        if(collides(player, wallpiece)){
+         move(player, 0, 11);
+            console.log("YOUR MOVE");
         }
-    } else if (event.key === "s" && y < 450.5) {
+         }
+    } else if (event.key === "s" && y < 219.5) {
         move(player, 0, 11);
-        if(collides(player, wall)){
-         move(player, 0, -11);  
-            console.log("Hello There");
+         for (var wallpiece of wall) {
+             console.log("Stuff");
+        if(collides(player, wallpiece)){
+         move(player, 0, -11);
+            console.log("YOUR MOVE");
         }
+         }
     }
         x = getX(player);
         y = getY(player);
@@ -677,29 +688,37 @@ function minotaurz() {
     var minogoes = Math.random() * 100;
         if(minogoes <= 25 && minox < 1314.5){
             move(minotaur, 11, 0);
-            if(collides(minotaur, wall)){
+             for (var wallpiece of wall) {
+            if(collides(minotaur, wallpiece)){
                 move(minotaur, -11, 0);  
-            }            
+            } 
+             }
         } else if (minogoes <= 50 && minogoes >= 25 && minoy < 594.5){
             move(minotaur, 0, -11);
-            if(collides(minotaur, wall)){
+             for (var wallpiece of wall) {
+            if(collides(minotaur, wallpiece)){
                 move(minotaur, 0, 11);  
             }
+             }
         } else if(minogoes <= 75 && minogoes >= 50 && minox > 5){
             move(minotaur, -11, 0);
-            if(collides(player, wall)){
+             for (var wallpiece of wall) {
+            if(collides(minotaur, wallpiece)){
                 move(minotaur, 11, 0);  
             }
+             }
         }else if(minogoes <= 100 && minogoes >= 75 && minoy > 5){
             move(minotaur, 0, 11);
-            if(collides(minotaur, wall)){
-                move(minotaur, 0, -11);  
+            for (var wallpiece of wall) {
+                if(collides(minotaur, wallpiece)){
+                    move(minotaur, 0, -11);  
+                }
             }
         }
         if(minoy > 594.5){
-         move(minotaur, 0, -16);   
+         move(minotaur, 0, -11);   
         }else if (minoy < 5){
-         move(minotaur, 0, 16);   
+         move(minotaur, 0, 11);   
         }
 
         minox = getX(minotaur);
@@ -708,18 +727,6 @@ function minotaurz() {
 minotaurz();
 var minotaurgo = setInterval(minotaurz, 1500); 
 
-function collision(){
- if(collides(player, wall)){
-    console.log("Hit!!");
- }else     
-    if(collides(player, minotaur)){
-     console.log("Beefed");   
-    }else{
-    console.log("Clear!!");
- }
-    requestAnimationFrame(collision);
-
-}
 //collision();
 
 function moreConditions() {    

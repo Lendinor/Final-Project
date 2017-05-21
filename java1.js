@@ -623,6 +623,7 @@ makeRect(209, 176, 10, 10, "black", 1),
 makeRect(209, 187, 10, 10, "black", 1), 
 makeRect(209, 209, 10, 10, "black", 1)] ;
 
+
 var Gate1 = makeRect(22 ,11, 10, 10, "purple", 1);
 var Gate2 = makeRect(209,198, 10, 10, "purple", 1);
 alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze.")
@@ -637,18 +638,26 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
         minotaur = makeRect(99, 110, 10, 10, "brown", 1),
         minox = getX(minotaur),
         minoy = getY(minotaur),
-        mdead = false;
-
-
+        mdead = false,
+        pdead = false;
+        for (var wallpiece of wall)
+        var wallx = getX(wallpiece);
+        var wally = getY(wallpiece);
+        console.log(wallx);
+        console.log(wally);
         addEventListener('keydown', movePlayer);
 
     function movePlayer(event) {
  //   console.log(event)
+    if(pdead === true){
+        
+    }else{
+        
     if (event.key === "a" && x > 5) {
         move(player, -11, 0);
          for (var wallpiece of wall) {
              console.log("Stuff");
-        if(collides(player, wallpiece)){
+        if(wallx === x && wally === y){
          move(player, 11, 0);  
             console.log("YOUR MOVE");
         }
@@ -657,29 +666,25 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
         move(player, 11, 0);
          for (var wallpiece of wall) {
              console.log("Stuff");
-        if(collides(player, wallpiece)){
+        if(wallx === x && wally === y){
          move(player, -11, 0);
             console.log("YOUR MOVE");
         }
          }
     } else if (event.key === "w" && y > 5) {
         move(player, 0, -11);
-         for (var wallpiece of wall) {
              console.log("Stuff");
-        if(collides(player, wallpiece)){
+        if(wallx === x && wally === y){
          move(player, 0, 11);
             console.log("YOUR MOVE");
         }
-         }
     } else if (event.key === "s" && y < 219.5) {
         move(player, 0, 11);
-         for (var wallpiece of wall) {
              console.log("Stuff");
-        if(collides(player, wallpiece)){
+        if(wallx === x && wally === y){
          move(player, 0, -11);
             console.log("YOUR MOVE");
         }
-         }
     }else if (event.key === "f"){
         if(minox === x + 11 || minox === x - 11){
             if(minoy === y){
@@ -691,7 +696,7 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
         y = getY(player);
         player.setAttribute("opacity", 0);
         player = makeRect(x, y, 10, 10, "green", 1);
-
+    }
     }
 
 function minotaurz() {
@@ -701,32 +706,25 @@ function minotaurz() {
     var minogoes = Math.random() * 100;
         if(minogoes <= 25 && minox < 1314.5){
             move(minotaur, 11, 0);
-             for (var wallpiece of wall) {
-            if(collides(minotaur, wallpiece)){
+            if(wallx === minox && wally === minoy){
                 move(minotaur, -11, 0);  
             } 
-             }
         } else if (minogoes <= 50 && minogoes >= 25 && minoy < 594.5){
             move(minotaur, 0, -11);
-             for (var wallpiece of wall) {
-            if(collides(minotaur, wallpiece)){
+            if(wallx === minox && wally === minoy){
                 move(minotaur, 0, 11);  
             }
-             }
         } else if(minogoes <= 75 && minogoes >= 50 && minox > 5){
             move(minotaur, -11, 0);
-             for (var wallpiece of wall) {
-            if(collides(minotaur, wallpiece)){
+            if(wallx === minox && wally === minoy){
                 move(minotaur, 11, 0);  
             }
-             }
+
         }else if(minogoes <= 100 && minogoes >= 75 && minoy > 5){
             move(minotaur, 0, 11);
-            for (var wallpiece of wall) {
-                if(collides(minotaur, wallpiece)){
+                if(wallx === minox && wally === minoy){
                     move(minotaur, 0, -11);  
                 }
-            }
         }
         if(minoy > 594.5){
          move(minotaur, 0, -11);   
@@ -734,6 +732,13 @@ function minotaurz() {
          move(minotaur, 0, 11);   
         }
 
+        if(minox === x && minoy === y){
+            player.parentNode.removeChild(player);
+            alert("You died!");
+            alert("Resetting Maze...");
+            document.location.reload(); 
+        }   
+            
         minox = getX(minotaur);
         minoy = getY(minotaur);
     }

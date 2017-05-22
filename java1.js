@@ -621,12 +621,12 @@ makeRect(209, 154, 10, 10, "black", 1),
 makeRect(209, 165, 10, 10, "black", 1), 
 makeRect(209, 176, 10, 10, "black", 1), 
 makeRect(209, 187, 10, 10, "black", 1), 
-makeRect(209, 209, 10, 10, "black", 1)] ;
+makeRect(209, 209, 10, 10, "red", 1)] ;
 
 
 var Gate1 = makeRect(22 ,11, 10, 10, "purple", 1);
 var Gate2 = makeRect(209,198, 10, 10, "purple", 1);
-alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze.")
+alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze. Collision only work on the red square unfortunately.")
 //var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
     var player = makeRect(22, 22, 10, 10, "green", 1), 
         x = getX(player), 
@@ -650,7 +650,11 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
     function movePlayer(event) {
  //   console.log(event)
     if(pdead === true){
-        
+            player.parentNode.removeChild(player);
+            alert("You died!");
+            alert("Resetting Maze...");
+            document.location.reload(); 
+ 
     }else{
         
     if (event.key === "a" && x > 5) {
@@ -737,6 +741,7 @@ function minotaurz() {
 
         if(minox === x && minoy === y){
             player.parentNode.removeChild(player);
+            pdead = true;
             alert("You died!");
             alert("Resetting Maze...");
             document.location.reload(); 
@@ -755,6 +760,10 @@ function moreConditions() {
     xscore = x;
     yscore = y;
 
+    if(mdead == false && ((x === 22 && y === 11)||(x === 209 && y === 198))){
+        pdead == true;
+       }
+    
     xscoreText.innerHTML = xscore;
     yscoreText.innerHTML = yscore;
         

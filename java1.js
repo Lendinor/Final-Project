@@ -656,7 +656,7 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
     if (event.key === "a" && x > 5) {
         move(player, -11, 0);
          for (var wallpiece of wall) {
-             console.log("Stuff");
+             
         if(wallx === x && wally === y){
          move(player, 11, 0);  
             console.log("YOUR MOVE");
@@ -665,7 +665,7 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
     } else if (event.key === "d" && x < 219.5) {
         move(player, 11, 0);
          for (var wallpiece of wall) {
-             console.log("Stuff");
+             
         if(wallx === x && wally === y){
          move(player, -11, 0);
             console.log("YOUR MOVE");
@@ -673,14 +673,14 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
          }
     } else if (event.key === "w" && y > 5) {
         move(player, 0, -11);
-             console.log("Stuff");
+             
         if(wallx === x && wally === y){
          move(player, 0, 11);
             console.log("YOUR MOVE");
         }
     } else if (event.key === "s" && y < 219.5) {
         move(player, 0, 11);
-             console.log("Stuff");
+             
         if(wallx === x && wally === y){
          move(player, 0, -11);
             console.log("YOUR MOVE");
@@ -694,6 +694,9 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
     }
         x = getX(player);
         y = getY(player);
+        console.log(x);
+        console.log(y);
+        
         player.setAttribute("opacity", 0);
         player = makeRect(x, y, 10, 10, "green", 1);
     }

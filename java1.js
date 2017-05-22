@@ -626,7 +626,7 @@ makeRect(209, 209, 10, 10, "red", 1)] ;
 
 var Gate1 = makeRect(22 ,11, 10, 10, "purple", 1);
 var Gate2 = makeRect(209,198, 10, 10, "purple", 1);
-alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze. Collision only work on the red square unfortunately.")
+alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze. Collision only works on the red square unfortunately, use Ctrl + Shift + J to view what happens")
 //var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
     var player = makeRect(22, 22, 10, 10, "green", 1), 
         x = getX(player), 

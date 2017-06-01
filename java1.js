@@ -626,7 +626,7 @@ makeRect(209, 209, 10, 10, "red", 1)] ;
 
 var Gate1 = makeRect(22 ,11, 10, 10, "purple", 1);
 var Gate2 = makeRect(209,198, 10, 10, "purple", 1);
-alert("Use W,A,S,D to move the green square. Use F to kill the brown square. After the brown sqaure is dead, escape out the bottom of the maze. Collision only works on the red square unfortunately, use Ctrl + Shift + J to view what happens")
+alert("Use W,A,S,D to move the green square. Use F to defeat the brown square. After the brown sqaure is defeated, escape out the bottom of the maze.")// Collision only works on the red square unfortunately, use Ctrl + Shift + J to view what happens
 //var FOW = makeRect(0, 0, 1001.5, 610.5, "black", 0);
     var player = makeRect(22, 22, 10, 10, "green", 1), 
         x = getX(player), 
@@ -640,9 +640,10 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
         minoy = getY(minotaur),
         mdead = false,
         pdead = false;
-        for (var wallpiece of wall)
+        for (var wallpiece of wall){
         var wallx = getX(wallpiece);
         var wally = getY(wallpiece);
+        }
         console.log(wallx);
         console.log(wally);
         addEventListener('keydown', movePlayer);
@@ -659,32 +660,24 @@ alert("Use W,A,S,D to move the green square. Use F to kill the brown square. Aft
         
     if (event.key === "a" && x > 5) {
         move(player, -11, 0);
-         for (var wallpiece of wall) {
-             
         if(wallx === x && wally === y){
          move(player, 11, 0);  
             console.log("YOUR MOVE");
-        }
          }
     } else if (event.key === "d" && x < 219.5) {
-        move(player, 11, 0);
-         for (var wallpiece of wall) {
-             
+        move(player, 11, 0);            
         if(wallx === x && wally === y){
          move(player, -11, 0);
             console.log("YOUR MOVE");
         }
-         }
     } else if (event.key === "w" && y > 5) {
-        move(player, 0, -11);
-             
+        move(player, 0, -11);    
         if(wallx === x && wally === y){
          move(player, 0, 11);
             console.log("YOUR MOVE");
         }
     } else if (event.key === "s" && y < 219.5) {
-        move(player, 0, 11);
-             
+        move(player, 0, 11);     
         if(wallx === x && wally === y){
          move(player, 0, -11);
             console.log("YOUR MOVE");
